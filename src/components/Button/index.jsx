@@ -1,8 +1,8 @@
 import "./styles.css";
 
-export const Button = ({ text, onClick, disabled }) => (
+export const Button = ({ text, onClick, disabled, reference }) => (
   <button
-    id="buttonId"
+    ref={reference}
     className="button"
     onClick={onClick}
     disabled={disabled}

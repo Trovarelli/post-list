@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 import { loadPosts } from "../../utils/load-posts";
 import { Posts } from "../../components/posts";
@@ -8,6 +8,7 @@ import { Button } from "../../components/Button";
 import { TextInput } from "../../components/TextInput";
 
 export const Home = () => {
+  const ref = useRef(null);
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
@@ -42,11 +43,10 @@ export const Home = () => {
     const nextPage = page + postsPerPage;
     const nextPosts = allPosts.slice(nextPage, nextPage + postsPerPage);
     posts.push(...nextPosts);
-    let button = document.getElementById("buttonId");
     setPosts(posts);
     setPage(nextPage);
     setTimeout(() => {
-      button.scrollIntoView({ block: "end", behavior: "smooth" });
+      ref.current?.scrollIntoView({ block: "end", behavior: "smooth" });
     }, 300);
   };
 
@@ -74,6 +74,7 @@ export const Home = () => {
             disabled={noMorePosts}
             text={"Load more posts"}
             onClick={loadMorePosts}
+            reference={ref}
           ></Button>
         )}
       </div>
