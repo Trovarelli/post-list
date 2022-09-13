@@ -1,4 +1,5 @@
 import "./styles.css";
+import P from "prop-types";
 
 export const Button = ({ text, onClick, disabled, reference }) => (
   <button
@@ -10,3 +11,14 @@ export const Button = ({ text, onClick, disabled, reference }) => (
     {text}
   </button>
 );
+
+Button.defaultProps = {
+  disabled: false,
+};
+
+Button.propTypes = {
+  text: P.string.isRequired,
+  onClick: P.func.isRequired,
+  disabled: P.bool,
+  reference: P.string.isRequired,
+};
